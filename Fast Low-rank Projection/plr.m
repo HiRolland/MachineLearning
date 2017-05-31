@@ -1,13 +1,24 @@
 %
-% 根据标签信息训练一个分类器W
+% 
 %
 %   alpha,beta = {100, 50, 20, 10, 5, 1}
 %   lambda {1, 0.1, 0.01, .0.001}
 %   error = {1, 0.5, 0.05, 0.01, 0.001}
 %
 function [Z, A, W, b] = plr(X, Q)
-% X  : d x n, d is dimension of sample 
-% Q : the label matrix
+% solve:
+% 	min||f(WX + B)||_* + lambda(||A||^2_F + ||W||^2_F + ||b||^2_2)
+%	s.t. ||Q - A*f(WX + b)||^2_F < tol
+%     
+%   f:  sigmoid function
+%   W: projection matrix to be learned
+%   b: bias
+%	B: each colum is b
+% 	A: the overcompleted label matrix
+%	Z: Z = f(WX + B)
+%
+%	X: input samples, d x n, d is dimension
+%	Q: label matix of input samples 
 % 
 
 alpha = 5;
